@@ -1,16 +1,34 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser'
+import { NgModule } from '@angular/core'
+import { RouterModule } from '@angular/router';
 
-import { AppComponent } from './app.component';
+import { EventsAppComponent } from './events-app.component'
+import { EventsListComponent } from './events/events-list.component'
+import { EventThumbnailComponent } from './events/event-thumbnail.component'
+import { NavBarComponent } from './nav/navbar.component'
+import { EventService } from './events/shared/event.service'
+import { ToastrService } from '../app/common/toastr.service'
+import { EventDetailsComponent } from './events/event-details/event-details.component'
+import { CreateEventComponent } from './events/create-event.component'
+import { appRoutes } from './routes'
+import { Error404Component } from './errors/404.component'
+import { EventRouteActivator } from './events/event-details/event-route-activator.service'
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    RouterModule.forRoot(appRoutes)
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  declarations: [
+    EventsAppComponent,
+    EventsListComponent,
+    EventThumbnailComponent,
+    EventDetailsComponent,
+    CreateEventComponent,
+    NavBarComponent,
+    Error404Component
+  ],
+  providers: [EventService, ToastrService, EventRouteActivator],
+  bootstrap: [EventsAppComponent]
 })
 export class AppModule { }
