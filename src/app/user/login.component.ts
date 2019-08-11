@@ -1,9 +1,9 @@
 import { Component } from '@angular/core'
+import { AuthService } from './auth.service'
 import { Router } from '@angular/router'
-import { EventService } from './shared/event.service'
 
 @Component({
-  templateUrl: 'create-event.component.html',
+  templateUrl: './login.component.html',
   styles: [`
     em { float:right; color:#E05C65; padding-left:10px; }
     .error input { background-color:#E3C3C5; }
@@ -14,20 +14,21 @@ import { EventService } from './shared/event.service'
   `]
 })
 
-export class CreateEventComponent {
-  isDirty:boolean = true
-  newEvent
-  constructor(private router:Router, private eventService:EventService){
+export class LoginComponent {
+  constructor(private authService:AuthService, private router:Router){
 
   }
 
-  saveEvent(formValues){
-    this.eventService.saveEvent(formValues)
-    this.isDirty = false
-    this.router.navigate(['/events'])
+  userName
+  password
+  mouseoverLogin
+
+  login(formValues){
+    this.authService.loginUser(formValues.userName, formValues.password)
+    this.router.navigate(['events'])
   }
 
   cancel(){
-    this.router.navigate(['/events'])
+    this.router.navigate(['events'])
   }
 }
